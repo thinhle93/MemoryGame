@@ -2,7 +2,7 @@
   padding: 20px;
   background: white;
   margin: 10px;
-  /* width: 50px; */
+  width: 100px;
   height: 75px;
   /* display: inline-block; */
 }
@@ -15,16 +15,14 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  /* display: flex;
-  flex-direction: column;
-  gap: 10px; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-
-/* .row {
-  display: flex;
-} */
 
 .show {
   cursor: default;
   pointer-events: disabled;
+  background-color: aqua;
 }

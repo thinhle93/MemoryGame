@@ -6,3 +6,9 @@ p {
 body {
   background-color: black;
 }
+
+.center {
+  padding: absolute;
+  left: 50%;
+  bottom: 100px;
+}
