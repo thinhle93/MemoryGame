@@ -1,3 +1,3 @@
 # MemoryGame
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-ebkesb)
+[Demo on StackBlitz ⚡️](https://stackblitz.com/edit/react-ebkesb)
