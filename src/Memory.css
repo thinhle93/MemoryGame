@@ -26,3 +26,18 @@
   pointer-events: disabled;
   background-color: aqua;
 }
+
+.replay-btn {
+  border-radius: 5px;
+  border: 1px black solid;
+}
+
+.notification {
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  background-color: aqua;
+  width: 200px;
+  text-align: center;
+  padding: 0 0 10px 0;
+}

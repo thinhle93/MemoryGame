@@ -2,19 +2,28 @@ import React from 'react';
 import React, { useState } from 'react';
 import './Memory.css';
 export default function Memory() {
-  const [grid, setGrid] = useState([
+  const startingGrid = [
     [0, 3, 5, 1],
     [1, 2, 2, 4],
     [4, 3, 5, 0],
-  ]);
+  ];
+  const [grid, setGrid] = useState(startingGrid);
 
-  const [gridCheck, setGridCheck] = useState(
-    new Array(grid.length)
-      .fill('')
-      .map(() => new Array(grid[0].length).fill(false))
-  );
+  // const [gridCheck, setGridCheck] = useState(
+  //   new Array(grid.length)
+  //     .fill('')
+  //     .map(() => new Array(grid[0].length).fill(false))
+  // );
+
+  const startingCheckGrid = new Array(grid.length)
+    .fill('')
+    .map(() => new Array(grid[0].length).fill(false));
+
+  const [gridCheck, setGridCheck] = useState(startingCheckGrid);
 
   const [firstClicked, setFirstClicked] = useState(null);
+
+  const [gameClear, setGameClear] = useState(false);
 
   function handleCellClicked(rowIndex, colIndex) {
     if (gridCheck[rowIndex][colIndex]) return; // prevents same cell from being clicked
@@ -42,7 +51,7 @@ export default function Memory() {
         const clear = gridCheck.flat().every((element) => element);
         if (clear) {
           setTimeout(() => {
-            alert('game cleared');
+            setGameClear(true);
           }, 500);
         }
       }
@@ -52,23 +61,38 @@ export default function Memory() {
       setFirstClicked([rowIndex, colIndex]);
     }
   }
+
+  function resetGame() {
+    setGameClear(false);
+    setGridCheck(startingCheckGrid);
+  }
   return (
-    <div className="grid">
-      {grid.map((row, rowIndex) => (
-        <div key={rowIndex} clasName="row">
-          {row.map((number, colIndex) => (
-            <div
-              onClick={() => handleCellClicked(rowIndex, colIndex)}
-              key={colIndex}
-              className={
-                'card ' + (gridCheck[rowIndex][colIndex] ? 'show' : '')
-              }
-            >
-              {gridCheck[rowIndex][colIndex] ? number : ' '}
-            </div>
-          ))}
+    <div>
+      {gameClear && (
+        <div className="notification">
+          <p>Game Cleared</p>
+          <button className="replay-btn" onClick={resetGame}>
+            Replay
+          </button>
         </div>
-      ))}
+      )}
+      <div className="grid">
+        {grid.map((row, rowIndex) => (
+          <div key={rowIndex} clasName="row">
+            {row.map((number, colIndex) => (
+              <div
+                onClick={() => handleCellClicked(rowIndex, colIndex)}
+                key={colIndex}
+                className={
+                  'card ' + (gridCheck[rowIndex][colIndex] ? 'show' : '')
+                }
+              >
+                {gridCheck[rowIndex][colIndex] ? number : ' '}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
