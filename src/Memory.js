@@ -8,13 +8,7 @@ export default function Memory() {
     [4, 3, 5, 0],
   ];
   const [grid, setGrid] = useState(startingGrid);
-
-  // const [gridCheck, setGridCheck] = useState(
-  //   new Array(grid.length)
-  //     .fill('')
-  //     .map(() => new Array(grid[0].length).fill(false))
-  // );
-
+  
   const startingCheckGrid = new Array(grid.length)
     .fill('')
     .map(() => new Array(grid[0].length).fill(false));
@@ -65,6 +59,26 @@ export default function Memory() {
   function resetGame() {
     setGameClear(false);
     setGridCheck(startingCheckGrid);
+    shuffleGrid();
+  }
+
+  function shuffleGrid() {
+    const gameGrid = [...grid];
+    const numShuffle = 20;
+    const numRows = 3;
+    const numCols = 4;
+    for (let i = 0; i < numShuffle; i++) {
+      const randIndex1x = Math.floor(Math.random() * numRows);
+      const randIndex1y = Math.floor(Math.random() * numCols);
+      const randIndex2x = Math.floor(Math.random() * numRows);
+      const randIndex2y = Math.floor(Math.random() * numCols);
+      console.log(randIndex1x, randIndex1y, randIndex2x, randIndex2y);
+      const temp = gameGrid[randIndex1x][randIndex1y];
+      gameGrid[randIndex1x][randIndex1y] = gameGrid[randIndex2x][randIndex2y];
+      gameGrid[randIndex2x][randIndex2y] = temp;
+    }
+
+    setGrid(gameGrid);
   }
   return (
     <div>
