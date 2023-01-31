@@ -7,8 +7,8 @@ export default function Memory() {
     [1, 2, 2, 4],
     [4, 3, 5, 0],
   ];
-  const [grid, setGrid] = useState(startingGrid);
-  
+  const [grid, setGrid] = useState(shuffleGrid());
+
   const startingCheckGrid = new Array(grid.length)
     .fill('')
     .map(() => new Array(grid[0].length).fill(false));
@@ -59,11 +59,11 @@ export default function Memory() {
   function resetGame() {
     setGameClear(false);
     setGridCheck(startingCheckGrid);
-    shuffleGrid();
+    setGrid(shuffleGrid());
   }
 
   function shuffleGrid() {
-    const gameGrid = [...grid];
+    const gameGrid = [...startingGrid];
     const numShuffle = 20;
     const numRows = 3;
     const numCols = 4;
@@ -78,7 +78,8 @@ export default function Memory() {
       gameGrid[randIndex2x][randIndex2y] = temp;
     }
 
-    setGrid(gameGrid);
+    // setGrid(gameGrid);
+    return gameGrid;
   }
   return (
     <div>
